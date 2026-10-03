@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartHealth AI Platform</title>
+    <link rel="stylesheet" href="style (1).css">
+</head>
+<body>
+    <!-- LOGIN PAGE -->
+    <div id="login-page">
+        <div class="login-box">
+            <h2>🩺 SmartHealth</h2>
+            <p id="auth-subtitle">Sign in to your account</p>
+            <div class="credentials-hint">
+                ℹ️ Welcome to SmartHealth. New here? Create an account with your email, then log back in with those same credentials anytime.
+            </div>
+            <input type="email" id="email-field" placeholder="Email address" required autocomplete="email">
+            <input type="password" id="password-field" placeholder="Password" required autocomplete="current-password" onkeypress="if(event.key==='Enter') handleAuth()">
+            <input type="password" id="confirm-password-field" placeholder="Confirm Password" style="display:none;" autocomplete="new-password" onkeypress="if(event.key==='Enter') handleAuth()">
+            <div class="login-error-msg" id="login-error-msg"></div>
+            <button class="btn" id="login-btn" onclick="handleAuth()">Login Securely</button>
+            <p style="margin-top:16px; font-size:13px; color: var(--text-light);">
+                <span id="toggle-text">Don't have an account?</span>
+                <a href="#" id="toggle-link" onclick="toggleAuthMode(); return false;" style="color: var(--primary-color); font-weight:600; text-decoration:none;">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- MAIN APP (shown after login) -->
+    <div id="app-dashboard">
+        <nav>
+            <div class="nav-brand">🩺 SmartHealth</div>
+            <div class="nav-links">
+                <button class="active" onclick="switchTab('home-tab')" id="nav-home-tab">Home &amp; About</button>
+                <button onclick="switchTab('ai-tab')" id="nav-ai-tab">AI Assistant</button>
+                <button onclick="switchTab('video-tab')" id="nav-video-tab">Telemedicine</button>
+                <button onclick="switchTab('med-tab')" id="nav-med-tab">My Prescriptions</button>
+                <button onclick="switchTab('history-tab')" id="nav-history-tab">My History</button>
+                <button onclick="logout()" style="color: var(--danger-color); font-weight: bold;">Logout</button>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div id="home-tab" class="view-section active">
+                <div class="hero-banner-container">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173e5eb3d0d?auto=format&fit=crop&w=1200&q=80" alt="Healthcare Technology" class="hero-banner">
+                    <div class="hero-overlay">
+                        <h1>Smart Care, Anywhere</h1>
+                        <p>Bridging the gap between cutting-edge Artificial Intelligence and world-class telemedicine for seamless, immediate healthcare access.</p>
+                    </div>
+                </div>
+
+                <div class="ai-callout-banner">
+                    <div class="ai-callout-text">
+                        <h3>💬 Need Immediate Medical Advice?</h3>
+                        <p>Our SmartHealth AI Assistant is available 24/7. Click the floating button in the bottom-right corner or visit the AI Assistant tab!</p>
+                    </div>
+                    <button class="ai-callout-btn" onclick="toggleChat()">Chat with AI Now</button>
+                </div>
+
+                <h3 class="section-title">About Our SmartHealth Platform</h3>
+                <div class="about-text">
+                    <strong>SmartHealth</strong> is a comprehensive digital healthcare ecosystem designed to streamline patient consultations, diagnostic triage, and prescription management into a single, unified platform. By integrating instant AI symptom analysis with real-time video consultations and automated e-prescriptions, SmartHealth removes physical barriers to high-quality healthcare.
+                </div>
+
+                <h3 class="section-title" style="font-size: 20px;">Platform Highlights &amp; Features</h3>
+                <div class="photo-gallery-grid">
+                    <div class="photo-card">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=600&q=80" alt="AI Symptom Analysis">
+                        <div class="photo-card-body">
+                            <h4>🤖 Instant AI Triage</h4>
+                            <p>Ask health questions and describe symptoms anytime. Our AI provides instant preliminary guidance and health recommendations.</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="HD Video Consultations">
+                        <div class="photo-card-body">
+                            <h4>📹 HD Telemedicine</h4>
+                            <p>Connect face-to-face with certified specialists in General Medicine, Cardiology, and Pediatrics from the comfort of your home.</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80" alt="Auto Prescriptions">
+                        <div class="photo-card-body">
+                            <h4>📝 e-Prescription Sheet</h4>
+                            <p>Once your video call ends, your doctor automatically issues a digitally signed, locked prescription sheet straight to your account.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title" style="font-size: 20px;">Our Aims &amp; Mission</h3>
+                <div class="aim-grid">
+                    <div class="aim-card">
+                        <div class="icon">⚡</div>
+                        <h4>Speed &amp; Access</h4>
+                        <p>Eliminate long clinic waiting times with instantaneous AI help and quick online doctor appointments.</p>
+                    </div>
+                    <div class="aim-card">
+                        <div class="icon">🔒</div>
+                        <h4>Security &amp; Trust</h4>
+                        <p>Ensure patient data privacy and tamper-proof prescription records with official doctor verification.</p>
+                    </div>
+                    <div class="aim-card">
+                        <div class="icon">🌐</div>
+                        <h4>Universal Care</h4>
+                        <p>Deliver quality medical expertise to patients anywhere, regardless of geographic or mobility constraints.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ai-tab" class="view-section">
+                <h3 class="section-title">🤖 AI Health Assistant</h3>
+                <p style="margin-bottom: 20px; color: var(--text-light);">Type your health symptoms or questions below for instant guidance from our AI model.</p>
+                <div class="ai-tab-chat-box" id="ai-tab-chat-box">
+                    <div class="message msg-ai">Hello! 👋 I am your SmartHealth AI Assistant. How can I help you today? Feel free to describe any symptoms or ask medical questions.</div>
+                </div>
+                <div class="chat-input-area" style="padding: 0;">
+                    <input type="text" id="ai-tab-chat-input" placeholder="E.g., I have a fever and sore throat..." onkeypress="if(event.key==='Enter') sendTabMessage()">
+                    <button onclick="sendTabMessage()" style="border-radius: 8px; width: 80px;">Send</button>
+                </div>
+            </div>
+
+            <div id="video-tab" class="view-section">
+                <div id="doctor-list-section">
+                    <h3 class="section-title">🩺 Available Doctors Online</h3>
+                    <p style="margin-bottom: 20px; color: var(--text-light);">Select a specialist to initiate a secure video consultation.</p>
+                    <div class="doctor-grid" id="doctor-grid"></div>
+                </div>
+                <div id="active-call-section">
+                    <h3 class="section-title">📹 Telemedicine Consultation</h3>
+                    <div class="video-container" id="main-video"></div>
+                    <div class="call-controls">
+                        <button class="call-btn btn-action" onclick="toggleMic()" title="Mute/Unmute">🎤</button>
+                        <button class="call-btn btn-action" onclick="toggleCam()" title="Turn off/on Camera">📷</button>
+                        <button class="call-btn btn-end" onclick="endCall()" title="End Call & Generate Prescription">📞</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="med-tab" class="view-section">
+                <h3 class="section-title">📝 Official e-Prescriptions</h3>
+                <div class="warning-text">
+                    <strong>🔒 Security Notice:</strong> Medicines are automatically suggested and added to your sheet by the consulting doctor. As a patient, you cannot manually add or remove medicines from this official document.
+                </div>
+                <div id="prescription-container"></div>
+            </div>
+
+            <div id="history-tab" class="view-section">
+                <h3 class="section-title">🗂️ My Medical History</h3>
+                <p style="margin-bottom: 20px; color: var(--text-light);">A record of all your past consultations and prescriptions on SmartHealth.</p>
+                <div id="history-container"></div>
+            </div>
+        </div>
+
+        <button class="chat-fab" onclick="toggleChat()" title="Ask AI Assistant Corner Widget">💬</button>
+        <div class="chat-widget" id="chat-widget">
+            <div class="chat-header">
+                <span>🤖 AI Health Assistant (Corner Widget)</span>
+                <button onclick="toggleChat()">×</button>
+            </div>
+            <div class="chat-box" id="chat-box">
+                <div class="message msg-ai">Hi there! 👋 I am your SmartHealth AI. Ask me any health questions or doubts here.</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your symptoms..." onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+
+        <!-- Payment Modal -->
+        <div class="modal-overlay" id="payment-modal-overlay">
+            <div class="payment-modal-box">
+                <div class="payment-modal-header">
+                    <h3>💳 Complete Payment</h3>
+                    <button onclick="closePaymentModal()">×</button>
+                </div>
+                <div class="payment-modal-body" id="payment-modal-body">
+                    <div id="payment-select-view">
+                        <div class="payment-amount-box">
+                            <span>Amount Payable</span>
+                            <span id="payment-amount-display">₹0</span>
+                        </div>
+                        <div class="payment-methods-list" id="payment-methods-list">
+                            <label class="payment-method-option" data-method="upi">
+                                <span class="pm-icon"><span class="pm-badge pm-upi">UPI</span></span>
+                                <span class="pm-label">UPI</span>
+                                <input type="radio" name="payMethod" value="upi" onchange="selectPaymentMethod('upi')">
+                            </label>
+                            <label class="payment-method-option" data-method="gpay">
+                                <span class="pm-icon"><span class="pm-badge pm-gpay"><span class="g-dot">G</span>&nbsp;Pay</span></span>
+                                <span class="pm-label">Google Pay</span>
+                                <input type="radio" name="payMethod" value="gpay" onchange="selectPaymentMethod('gpay')">
+                            </label>
+                            <label class="payment-method-option" data-method="phonepe">
+                                <span class="pm-icon"><span class="pm-badge pm-phonepe">Pe</span></span>
+                                <span class="pm-label">PhonePe</span>
+                                <input type="radio" name="payMethod" value="phonepe" onchange="selectPaymentMethod('phonepe')">
+                            </label>
+                            <label class="payment-method-option" data-method="paytm">
+                                <span class="pm-icon"><span class="pm-badge pm-paytm">Paytm</span></span>
+                                <span class="pm-label">Paytm</span>
+                                <input type="radio" name="payMethod" value="paytm" onchange="selectPaymentMethod('paytm')">
+                            </label>
+                            <label class="payment-method-option" data-method="card">
+                                <span class="pm-icon"><span class="pm-badge pm-card">💳</span></span>
+                                <span class="pm-label">Credit / Debit Card</span>
+                                <input type="radio" name="payMethod" value="card" onchange="selectPaymentMethod('card')">
+                            </label>
+                            <label class="payment-method-option" data-method="netbanking">
+                                <span class="pm-icon"><span class="pm-badge pm-bank">🏦</span></span>
+                                <span class="pm-label">Net Banking</span>
+                                <input type="radio" name="payMethod" value="netbanking" onchange="selectPaymentMethod('netbanking')">
+                            </label>
+                        </div>
+
+                        <div class="payment-extra-field" id="field-upi-id">
+                            <label>Enter UPI ID</label>
+                            <input type="text" id="upi-id-input" placeholder="yourname@upi">
+                        </div>
+                        <div class="payment-extra-field" id="field-card">
+                            <label>Card Number</label>
+                            <input type="text" id="card-number-input" placeholder="1234 5678 9012 3456" style="margin-bottom: 10px;" maxlength="19">
+                            <div style="display:flex; gap:10px;">
+                                <input type="text" id="card-expiry-input" placeholder="MM/YY" maxlength="5">
+                                <input type="text" id="card-cvv-input" placeholder="CVV" maxlength="3">
+                            </div>
+                        </div>
+                        <div class="payment-extra-field" id="field-netbanking">
+                            <label>Select Bank</label>
+                            <select id="bank-select-input" style="width:100%; padding:12px; border:1px solid #dee2e6; border-radius:8px; font-size:14px;">
+                                <option value="">-- Choose Bank --</option>
+                                <option value="SBI">State Bank of India</option>
+                                <option value="HDFC">HDFC Bank</option>
+                                <option value="ICICI">ICICI Bank</option>
+                                <option value="AXIS">Axis Bank</option>
+                                <option value="KOTAK">Kotak Mahindra Bank</option>
+                            </select>
+                        </div>
+
+                        <button class="btn" onclick="processPayment()">Pay Now</button>
+                        <div class="payment-secure-note">🔒 100% Secure Payments • Demo Simulation Only</div>
+                    </div>
+
+                    <div id="payment-processing-view" style="display:none; text-align:center; padding: 30px 0;">
+                        <div style="font-size: 45px; margin-bottom: 15px;">⏳</div>
+                        <h3 style="color: var(--primary-color); margin-bottom: 8px;">Processing Payment...</h3>
+                        <p style="color: var(--text-light); font-size: 14px;">Please do not close this window.</p>
+                    </div>
+
+                    <div id="payment-success-view" class="payment-success-view" style="display:none;">
+                        <div class="success-icon">✅</div>
+                        <h3>Payment Successful!</h3>
+                        <p>Your medicines will be delivered within 24-48 hours.</p>
+                        <p id="payment-success-method"></p>
+                        <div class="txn-id" id="payment-txn-id"></div>
+                        <button class="btn" style="margin-top: 20px;" onclick="closePaymentModal()">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>🩺 SmartHealth</h4>
+                    <p>Revolutionizing healthcare access with AI-driven triage, instant telemedicine video consultations, and automated digital prescriptions.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#" onclick="switchTab('home-tab'); return false;">Home &amp; About</a></li>
+                        <li><a href="#" onclick="switchTab('ai-tab'); return false;">AI Health Assistant</a></li>
+                        <li><a href="#" onclick="switchTab('video-tab'); return false;">Telemedicine Doctors</a></li>
+                        <li><a href="#" onclick="switchTab('med-tab'); return false;">My Prescriptions</a></li>
+                        <li><a href="#" onclick="switchTab('history-tab'); return false;">My History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#" onclick="switchTab('ai-tab'); return false;">24/7 AI Health Chatbot</a></li>
+                        <li><a href="#" onclick="switchTab('video-tab'); return false;">Online Doctor Consultation</a></li>
+                        <li><a href="#" onclick="switchTab('med-tab'); return false;">Automated e-Prescriptions</a></li>
+                        <li><a href="#" onclick="switchTab('med-tab'); return false;">Home Pharmacy Delivery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact &amp; Support</h4>
+                    <p>📍 123 Digital Health Way, Web City</p>
+                    <p>📞 Emergency: +1 800 SMART MED</p>
+                    <p>✉ Support: help@smarthealth.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartHealth Digital Platform. All rights reserved. | Built with HTML, CSS, and JavaScript.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Your JavaScript file (same folder as this HTML file) -->
+    <script src="firebase.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Link checker: shows a red message if style.css or script.js did not load -->
+    <script>
+        window.addEventListener('load', function () {
+            var problems = [];
+            var css = getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
+            if (!css || !css.trim()) problems.push('style.css did NOT load. The file must be named exactly "style.css" and sit in the same folder as index.html.');
+            if (typeof window.firebaseLogin !== 'function') problems.push('firebase.js did NOT load. The file must be named exactly "firebase.js" and sit in the same folder as index.html.');
+            if (typeof window.handleAuth !== 'function') problems.push('script.js did NOT load. The file must be named exactly "script.js" and sit in the same folder as index.html.');
+            if (problems.length) {
+                var box = document.createElement('div');
+                box.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#dc3545;color:#fff;padding:14px 18px;font:15px/1.5 Arial,sans-serif;';
+                box.innerHTML = '<b>Setup problem:</b><br>' + problems.join('<br>');
+                document.body.appendChild(box);
+            }
+        });
+    </script>
+</body>
+</html>
