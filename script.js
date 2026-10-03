@@ -1,12 +1,5 @@
-/* ===================================================================
-   script.js  -  SmartHealth app logic (login screen, tabs, AI chat,
-   telemedicine, prescription, history, payment)
-   Needs firebase.js loaded first.
-   =================================================================== */
 
-/* ============================================================
-   DATA (doctors, AI rules, medicines, prices)
-   ============================================================ */
+/* js main file  */
 
 const DOCTORS = [
     {
